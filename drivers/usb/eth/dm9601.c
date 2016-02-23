@@ -361,6 +361,18 @@ void dm9601_eth_before_probe(void)
 	curr_eth_dev = 0;
 }
 
+struct dm9601_dongle {
+	unsigned short vendor;
+	unsigned short product;
+};
+
+
+static const struct dm9601_dongle dm9601_dongles[] = {
+	{ 0x0fe6, 0x9700 },
+	{ 0x0a46, 0x9601 },
+	{ 0x0000, 0x0000 }	/* END - Do not remove */
+};
+
 int dm9601_eth_probe(struct usb_device *dev, unsigned int ifnum, struct ueth_data *ss)
 {
 	struct usb_interface *iface;
@@ -371,9 +383,14 @@ int dm9601_eth_probe(struct usb_device *dev, unsigned int ifnum, struct ueth_dat
 	iface = &dev->config.if_desc[ifnum];
 	iface_desc = &dev->config.if_desc[ifnum].desc;
 
-	/* Just one device for now, no need for table */
-	if (dev->descriptor.idVendor != 0x0a46 ||
-		dev->descriptor.idProduct != 0x9601)
+	for (i = 0; dm9601_dongles[i].vendor != 0; i++) {
+		if (dev->descriptor.idVendor ==  dm9601_dongles[i].vendor &&
+		    dev->descriptor.idProduct == dm9601_dongles[i].product)
+			/* Found a supported dongle */
+			break;
+	}
+
+	if (dm9601_dongles[i].vendor == 0)
 		return 0;
 
 	/* At this point, we know we've got a live one */

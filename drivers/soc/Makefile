@@ -4,4 +4,5 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
+obj-y	+= qcom/
 obj-$(CONFIG_ARCH_KEYSTONE)	+= keystone/

@@ -129,13 +129,13 @@
 /* Environment - Boot*/
 #define CONFIG_BOOTDELAY		-1	/* autoboot after 5 seconds */
 
-#define CONFIG_SERVERIP	10.0.0.1
-#define CONFIG_IPADDR	10.0.0.2
+#define CONFIG_SERVERIP	192.168.1.100
+#define CONFIG_IPADDR	192.168.1.101
 #define CONFIG_NETMASK	255.255.255.0
 #define CONFIG_NFSBOOTCOMMAND ""
 #define CONFIG_ROOTPATH "/home/nfs/dragonboard"
-#define CONFIG_BOOTFILE "dragonboard/linux.itb"
-#define CONFIG_BOOTCOMMAND "usb start && tftp && usb stop && bootm"
+#define CONFIG_BOOTFILE "sting.bin"
+#define CONFIG_BOOTCOMMAND "icache off && dcache off && usb start && sleep 1 && mw.b 0x90000000 0x0 0x2000000 && tftpboot 0x90000000 sting.bin && usb stop && ssa 0x90000000 && go 0x90000000"
 #define CONFIG_BOOTARGS "console=ttyMSM0,115200n8"
 
 /* Does what recovery does */

@@ -106,7 +106,7 @@ int power_on_l2_msm8916(uint32_t pon_mask, int cpu)
 	pon_status = (urd32(l2_base + L2_PWR_STATUS) & pon_mask) == pon_mask;
 
 	if (pon_status) {
-        printf("L2 is already powered on\n");
+        //printf("L2 is already powered on\n");
 		return 0;
 	}
 

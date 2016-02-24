@@ -135,7 +135,8 @@
 #define CONFIG_NFSBOOTCOMMAND ""
 #define CONFIG_ROOTPATH "/home/nfs/dragonboard"
 #define CONFIG_BOOTFILE "sting.bin"
-#define CONFIG_BOOTCOMMAND "icache off && dcache off && usb start && sleep 1 && mw.b 0x90000000 0x0 0x2000000 && tftpboot 0x90000000 sting.bin && usb stop && ssa 0x90000000 && go 0x90000000"
+//#define CONFIG_BOOTCOMMAND "icache off && dcache off && usb start && sleep 1 && mw.b 0x90000000 0x0 0x2000000 && tftpboot 0x90000000 sting.bin && usb stop && ssa 0x90000000 && go 0x90000000"
+#define CONFIG_BOOTCOMMAND "icache off && dcache off && usb start && sleep 1 && mw.b 0x90000000 0x0 0x2000000 && tftpboot 0x90000000 bm.bin && usb stop && ssa 0x90000000 && go 0x90000000"
 #define CONFIG_BOOTARGS "console=ttyMSM0,115200n8"
 
 /* Does what recovery does */

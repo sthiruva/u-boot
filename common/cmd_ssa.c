@@ -16,17 +16,10 @@ static int do_ssa(cmd_tbl_t *cmdtp, int flag, int argc,
 
     void* start_addr = (void*) simple_strtoull(argv[1], NULL, 16);
 
-
-    udelay(1000000);
-
     for(uint32_t i = 1; i < 4; i++)
     {
-        printf("starting cpu : %d\n", i);
         msm_cpu_prepare(i, start_addr);
-
-        udelay(1000000);
         msm_cpu_boot(i);
-        udelay(1000000);
     }
 
     return 0;
